@@ -17,7 +17,10 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import DashboardPage from './Dashboard/DashboardPage';
 import ConfigurationPage from './Configuration/ConfigurationPage';
-import { mainListItems, secondaryListItems } from './MenuItems';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import { mainListItems, secondaryListItems, menu } from './MenuItems';
 
 const drawerWidth = 240;
 
@@ -163,9 +166,19 @@ class App extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
-          <Divider />
-          <List>{secondaryListItems}</List>
+          <list>
+            {menu.map(menuItem => (
+              <ListItem button>
+              <ListItemIcon>
+                {menuItem.icon}
+              </ListItemIcon>
+              <ListItemText primary={menuItem.title} />
+            </ListItem>
+            ))}
+          </list>
+          {/* <List>{mainListItems}</List> */}
+          {/* <Divider />
+          <List>{secondaryListItems}</List> */}
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
