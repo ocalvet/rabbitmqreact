@@ -1,8 +1,11 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 
 const ConfigurationPage = () => {
     return (
-        <h1>Configuration</h1>
+        <div>
+            <Typography variant="title">Configuration</Typography>
+        </div>
     )
 }
 

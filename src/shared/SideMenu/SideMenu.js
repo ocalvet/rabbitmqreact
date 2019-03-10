@@ -16,28 +16,28 @@ import styles from './SideMenuStyles';
 const SideMenu = ({ classes, open, onCloseDrawer }) => {
     return (
         <Drawer
-          variant="permanent"
-          classes={{
-            paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose),
-          }}
-          open={open}
+            variant="permanent"
+            classes={{
+                paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose),
+            }}
+            open={open}
         >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={onCloseDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            {menu.map(menuItem => (
-              <ListItem component={Link} to={menuItem.path}>
-              <ListItemIcon>
-                {menuItem.icon}
-              </ListItemIcon>
-              <ListItemText primary={menuItem.title} />
-            </ListItem>
-            ))}
-          </List>
+            <div className={classes.toolbarIcon}>
+                <IconButton onClick={onCloseDrawer}>
+                    <ChevronLeftIcon />
+                </IconButton>
+            </div>
+            <Divider />
+            <List>
+                {menu.map(menuItem => (
+                    <ListItem key={menuItem.title} component={Link} to={menuItem.path}>
+                        <ListItemIcon>
+                            {menuItem.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={menuItem.title} />
+                    </ListItem>
+                ))}
+            </List>
         </Drawer>
     );
 }
