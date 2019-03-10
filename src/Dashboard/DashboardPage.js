@@ -52,6 +52,7 @@ class DashboardPaction extends React.Component {
             console.log('received message', message);
             if (message.headers['correlation-id'] === id) {
                 this.handleMessageReceived(sub, message.body);
+                sub.unsubscribe();
             }
         });
         this.client.send('/amq/queue/rpc_queue', {
