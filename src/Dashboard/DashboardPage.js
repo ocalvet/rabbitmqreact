@@ -1,11 +1,20 @@
 import React from 'react';
-import { Typography, Divider, TextField, Button, withStyles } from '@material-ui/core';
+import ReactDOM from 'react-dom';
+import { Typography, TextField, Button, withStyles, FormControl, InputLabel, Select, OutlinedInput } from '@material-ui/core';
 
-class DashboardPage extends React.Component {
+class DashboardPaction extends React.Component {
     state = {
         action: 'getMenuItems',
         params: '',
+        response: null,
+        labelWidth: 0,
     };
+
+    componentDidMount() {
+        this.setState({
+            labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+        });
+    }
 
     handleChange = name => event => {
         this.setState({
@@ -13,32 +22,55 @@ class DashboardPage extends React.Component {
         });
     };
 
+    onSendCommand = () => {
+        console.log('Sending ' + this.state.action);
+        this.setState({ response: { title: 'testing response for ' + this.state.action }});
+    }
+
     render() {
         const { classes } = this.props
         return (
             <div>
                 <Typography variant="title">Dashboard</Typography>
-                <Divider />
                 <form className={classes.container} noValidate autoComplete="off">
-                    <TextField
-                        id="outlined-name"
-                        label="Action"
-                        className={classes.textField}
-                        value={this.state.action}
-                        onChange={this.handleChange('action')}
-                        margin="normal"
-                        variant="outlined"
-                    />
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel
+                            ref={ref => {
+                                this.InputLabelRef = ref;
+                            }}
+                            htmlFor="outlined-action-native-simple"
+                        >
+                            Action
+                        </InputLabel>
+                        <Select
+                            native
+                            value={this.state.action}
+                            onChange={this.handleChange('action')}
+                            input={
+                                <OutlinedInput
+                                    name="action"
+                                    labelWidth={this.state.labelWidth}
+                                    id="outlined-action-native-simple"
+                                />
+                            }
+                        >
+                            <option value={"getMenuItems"}>Get menu items</option>
+                            <option value={"getConfig"}>Get configuration</option>
+                            <option value={"closeCheck"}>Close check</option>
+                            <option value={"sendCheck"}>Send check</option>
+                        </Select>
+                    </FormControl>
 
-                    <Button variant="contained" className={classes.button}>
+                    <Button variant="contained" className={classes.button} onClick={this.onSendCommand}>
                         Send
                     </Button>
                 </form>
-                <Divider />
                 <div>
                     Response:
                     <pre>
-                        {JSON.stringify(this.props, null, 2)}
+                        {this.state.response ? 
+                            JSON.stringify(this.state.response, null, 2) :
+                            <div>No Response available</div>}
                     </pre>
                 </div>
             </div>
@@ -49,7 +81,9 @@ const styles = theme => ({
     container: {
         display: 'flex',
         flexWrap: 'wrap',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        marginTop: 20,
+        marginBottom: 20
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -64,4 +98,4 @@ const styles = theme => ({
     },
 });
 
-export default withStyles(styles)(DashboardPage);
+export default withStyles(styles)(DashboardPaction);
