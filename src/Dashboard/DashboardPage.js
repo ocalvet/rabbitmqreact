@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Typography, TextField, Button, withStyles, FormControl, InputLabel, Select, OutlinedInput } from '@material-ui/core';
+import { Typography, Button, withStyles, FormControl, InputLabel, Select, OutlinedInput } from '@material-ui/core';
+import Stomp  from 'stompjs';
 
 class DashboardPaction extends React.Component {
     state = {
@@ -11,9 +12,22 @@ class DashboardPaction extends React.Component {
     };
 
     componentDidMount() {
+        const socket = new WebSocket(process.env.REACT_APP_RABBITMQ_CONNECT_STRING);
+        this.client = Stomp.over(socket);
+        this.client.debug = null; // comment out this line to see more logging
+        this.client.connect(process.env.REACT_APP_RABBITMQ_USER, process.env.REACT_APP_RABBITMQ_PASSWORD, () => {
+            console.log('CONNECTED');
+            this.client.subscribe('/queue/web-test', this.handleMessageReceived);
+        }, (error) => {
+            console.log('ERROR', error);
+        }, 'appsuite');
         this.setState({
             labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
         });
+    }
+
+    handleMessageReceived = message => {
+        this.setState({ response: message });
     }
 
     handleChange = name => event => {
@@ -24,7 +38,8 @@ class DashboardPaction extends React.Component {
 
     onSendCommand = () => {
         console.log('Sending ' + this.state.action);
-        this.setState({ response: { title: 'testing response for ' + this.state.action }});
+        // this.setState({ response: { title: 'testing response for ' + this.state.action }});
+        this.client.send('/queue/web-test', {}, this.state.action);
     }
 
     render() {
