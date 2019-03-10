@@ -10,7 +10,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import IconButton from '@material-ui/core/IconButton';
 import classNames from 'classnames';
 
-const Header = ({ classes, open, openDrawer, closeDrawer }) => {
+const Header = ({ classes, open, onOpenDrawer }) => {
     return (
         <AppBar
           position="absolute"
@@ -20,7 +20,7 @@ const Header = ({ classes, open, openDrawer, closeDrawer }) => {
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={openDrawer}
+              onClick={onOpenDrawer}
               className={classNames(
                 classes.menuButton,
                 open && classes.menuButtonHidden,
