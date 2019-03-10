@@ -3,6 +3,16 @@ import ReactDOM from 'react-dom';
 import { Typography, Button, withStyles, FormControl, InputLabel, Select, OutlinedInput } from '@material-ui/core';
 import Stomp  from 'stompjs';
 
+function uuid(){
+    var dt = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+}
+
 class DashboardPaction extends React.Component {
     state = {
         action: 'getMenuItems',
@@ -17,7 +27,6 @@ class DashboardPaction extends React.Component {
         this.client.debug = null; // comment out this line to see more logging
         this.client.connect(process.env.REACT_APP_RABBITMQ_USER, process.env.REACT_APP_RABBITMQ_PASSWORD, () => {
             console.log('CONNECTED');
-            this.client.subscribe('/queue/web-test', this.handleMessageReceived);
         }, (error) => {
             console.log('ERROR', error);
         }, 'appsuite');
@@ -26,7 +35,7 @@ class DashboardPaction extends React.Component {
         });
     }
 
-    handleMessageReceived = message => {
+    handleMessageReceived = (sub, message) => {
         this.setState({ response: message });
     }
 
@@ -37,9 +46,18 @@ class DashboardPaction extends React.Component {
     };
 
     onSendCommand = () => {
-        console.log('Sending ' + this.state.action);
-        // this.setState({ response: { title: 'testing response for ' + this.state.action }});
-        this.client.send('/queue/web-test', {}, this.state.action);
+        const id = uuid();
+        console.log('Sending ' + this.state.action, id);
+        const sub = this.client.subscribe('/amq/queue/rpc_queue', (message) => {
+            console.log('received message', message);
+            if (message.headers['correlation-id'] === id) {
+                this.handleMessageReceived(sub, message.body);
+            }
+        });
+        this.client.send('/amq/queue/rpc_queue', {
+            'reply-to': 'rpc_queue',
+            'correlation-id': id,
+        }, this.state.action);
     }
 
     render() {
