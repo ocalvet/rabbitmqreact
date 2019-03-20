@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import xmlFormatter from 'xml-formatter';
 import {
   Typography,
   Button,
@@ -53,7 +53,21 @@ class DashboardPaction extends React.Component {
   }
 
   handleMessageReceived = (sub, message) => {
-    this.setState({ response: message });
+    const jsonBody = JSON.parse(message);
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(jsonBody.response, 'text/xml');
+    console.log(xmlDoc);
+    const xmlString = new XMLSerializer().serializeToString(
+      xmlDoc.documentElement
+    );
+    const options = {
+      indentation: '  ',
+      stripComments: true,
+      collapseContent: true
+    };
+    const formattedXml = xmlFormatter(xmlString, options);
+    // xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+    this.setState({ response: formattedXml });
   };
 
   handleChange = name => event => {
@@ -89,31 +103,6 @@ class DashboardPaction extends React.Component {
         <Typography variant="title">Dashboard</Typography>
         <form className={classes.container} noValidate autoComplete="off">
           <FormControl variant="outlined" className={classes.formControl}>
-            {/* <InputLabel
-              ref={ref => {
-                this.InputLabelRef = ref;
-              }}
-              htmlFor="outlined-action-native-simple"
-            >
-              Action
-            </InputLabel> */}
-            {/* <Select
-              native
-              value={this.state.action}
-              onChange={this.handleChange('action')}
-              input={
-                <OutlinedInput
-                  name="action"
-                  labelWidth={this.state.labelWidth}
-                  id="outlined-action-native-simple"
-                />
-              }
-            >
-              <option value={'getMenuItems'}>Get menu items</option>
-              <option value={'getConfig'}>Get configuration</option>
-              <option value={'closeCheck'}>Close check</option>
-              <option value={'sendCheck'}>Send check</option>
-            </Select> */}
             <TextField
               id="outlined-multiline-flexible"
               label="Soap Payload"
@@ -137,13 +126,7 @@ class DashboardPaction extends React.Component {
         </form>
         <div>
           Response:
-          <pre>
-            {this.state.response ? (
-              JSON.stringify(this.state.response, null, 2)
-            ) : (
-              <div>No Response available</div>
-            )}
-          </pre>
+          <pre>{this.state.response || <div>No Response available</div>}</pre>
         </div>
       </div>
     );
