@@ -11,40 +11,40 @@ import IconButton from '@material-ui/core/IconButton';
 import classNames from 'classnames';
 
 const Header = ({ classes, open, onOpenDrawer }) => {
-    return (
-        <AppBar
-          position="absolute"
-          className={classNames(classes.appBar, open && classes.appBarShift)}
+  return (
+    <AppBar
+      position="absolute"
+      className={classNames(classes.appBar, open && classes.appBarShift)}
+    >
+      <Toolbar disableGutters={!open} className={classes.toolbar}>
+        <IconButton
+          color="inherit"
+          aria-label="Open drawer"
+          onClick={onOpenDrawer}
+          className={classNames(
+            classes.menuButton,
+            open && classes.menuButtonHidden
+          )}
         >
-          <Toolbar disableGutters={!open} className={classes.toolbar}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={onOpenDrawer}
-              className={classNames(
-                classes.menuButton,
-                open && classes.menuButtonHidden,
-              )}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              App
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-    )
-}
+          <MenuIcon />
+        </IconButton>
+        <Typography
+          component="h1"
+          variant="h6"
+          color="inherit"
+          noWrap
+          className={classes.title}
+        >
+          RabbitMQ Connection Tester
+        </Typography>
+        <IconButton color="inherit">
+          <Badge badgeContent={4} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+      </Toolbar>
+    </AppBar>
+  );
+};
 
 export default withStyles(styles)(Header);
