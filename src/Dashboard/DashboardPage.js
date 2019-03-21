@@ -5,10 +5,7 @@ import {
   Button,
   withStyles,
   FormControl,
-  InputLabel,
-  TextField,
-  Select,
-  OutlinedInput
+  TextField
 } from '@material-ui/core';
 import Stomp from 'stompjs';
 
@@ -26,10 +23,8 @@ function uuid() {
 
 class DashboardPaction extends React.Component {
   state = {
-    // action: 'getMenuItems',
     params: '',
-    response: null,
-    labelWidth: 0
+    response: null
   };
 
   componentDidMount() {
@@ -47,9 +42,6 @@ class DashboardPaction extends React.Component {
       },
       'appsuite'
     );
-    // this.setState({
-    //   labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
-    // });
   }
 
   handleMessageReceived = (sub, message) => {
@@ -66,7 +58,6 @@ class DashboardPaction extends React.Component {
       collapseContent: true
     };
     const formattedXml = xmlFormatter(xmlString, options);
-    // xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
     this.setState({ response: formattedXml });
   };
 
