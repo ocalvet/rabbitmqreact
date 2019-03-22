@@ -14,32 +14,98 @@ const actions = [
   {
     id: 1,
     label: 'Get Menu Data',
-    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+    payload: `{
+       "request_type": "transaction_service",
+       "command": "",
+       "command_id": "f0bd1536-b9d0-45f3-bbbe-6e2b8aae4c5a",
+       "data": {
+           "request_headers": {
+               "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
+               "Content-Type": "text\/xml; charset=utf-8"
+           },
+           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+       }
+   }`
   },
   {
     id: 2,
     label: 'Post Order',
-    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+    payload: `{
+       "request_type": "transaction_service",
+       "command": "",
+       "command_id": "f0bd1536-b9d0-45f3-bbbe-6e2b8aae4c5a",
+       "data": {
+           "request_headers": {
+               "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
+               "Content-Type": "text\/xml; charset=utf-8"
+           },
+           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+       }
+   }`
   },
   {
     id: 3,
     label: 'Post Items',
-    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+    payload: `{
+       "request_type": "transaction_service",
+       "command": "",
+       "command_id": "f0bd1536-b9d0-45f3-bbbe-6e2b8aae4c5a",
+       "data": {
+           "request_headers": {
+               "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
+               "Content-Type": "text\/xml; charset=utf-8"
+           },
+           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+       }
+   }`
   },
   {
     id: 4,
     label: 'Post Services',
-    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+    payload: `{
+       "request_type": "transaction_service",
+       "command": "",
+       "command_id": "f0bd1536-b9d0-45f3-bbbe-6e2b8aae4c5a",
+       "data": {
+           "request_headers": {
+               "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
+               "Content-Type": "text\/xml; charset=utf-8"
+           },
+           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+       }
+   }`
   },
   {
     id: 5,
     label: 'Post Discounts',
-    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+    payload: `{
+       "request_type": "transaction_service",
+       "command": "",
+       "command_id": "f0bd1536-b9d0-45f3-bbbe-6e2b8aae4c5a",
+       "data": {
+           "request_headers": {
+               "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
+               "Content-Type": "text\/xml; charset=utf-8"
+           },
+           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+       }
+   }`
   },
   {
     id: 6,
     label: 'Post Payments',
-    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+    payload: `{
+       "request_type": "transaction_service",
+       "command": "",
+       "command_id": "f0bd1536-b9d0-45f3-bbbe-6e2b8aae4c5a",
+       "data": {
+           "request_headers": {
+               "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
+               "Content-Type": "text\/xml; charset=utf-8"
+           },
+           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+       }
+   }`
   }
 ];
 
