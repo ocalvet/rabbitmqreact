@@ -9,6 +9,40 @@ import {
 } from '@material-ui/core';
 import Stomp from 'stompjs';
 
+/* eslint-disable no-useless-escape */
+const actions = [
+  {
+    id: 1,
+    label: 'Get Menu Data',
+    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+  },
+  {
+    id: 2,
+    label: 'Post Order',
+    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+  },
+  {
+    id: 3,
+    label: 'Post Items',
+    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+  },
+  {
+    id: 4,
+    label: 'Post Services',
+    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+  },
+  {
+    id: 5,
+    label: 'Post Discounts',
+    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+  },
+  {
+    id: 6,
+    label: 'Post Payments',
+    payload: `<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>`
+  }
+];
+
 function uuid() {
   var dt = new Date().getTime();
   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(
@@ -70,7 +104,7 @@ class DashboardPaction extends React.Component {
   onSendCommand = () => {
     const id = uuid();
     console.log('Sending', this.state.payload, id);
-    const sub = this.client.subscribe('/amq/queue/rpc_queue', message => {
+    const sub = this.client.subscribe('/amq/queue/rpc_reply', message => {
       console.log('received message', sub, message);
       if (message.headers['correlation-id'] === id) {
         this.handleMessageReceived(sub, message.body);
@@ -80,11 +114,16 @@ class DashboardPaction extends React.Component {
     this.client.send(
       '/amq/queue/rpc_queue',
       {
-        'reply-to': 'rpc_queue',
+        'reply-to': 'rpc_reply',
         'correlation-id': id
       },
       this.state.payload
     );
+  };
+
+  updatePayload = id => () => {
+    const action = actions.filter(a => a.id === id)[0];
+    this.setState({ payload: action.payload });
   };
 
   render() {
@@ -92,6 +131,17 @@ class DashboardPaction extends React.Component {
     return (
       <div>
         <Typography variant="title">Dashboard</Typography>
+        <div>
+          {actions.map(action => (
+            <Button
+              variant="raised"
+              style={{ marginRight: 12, marginTop: 10 }}
+              onClick={this.updatePayload(action.id)}
+            >
+              {action.label}
+            </Button>
+          ))}
+        </div>
         <form className={classes.container} noValidate autoComplete="off">
           <FormControl variant="outlined" className={classes.formControl}>
             <TextField
