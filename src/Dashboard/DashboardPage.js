@@ -21,9 +21,9 @@ const actions = [
        "data": {
            "request_headers": {
                "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
-               "Content-Type": "text\/xml; charset=utf-8"
+               "Content-Type": "text/xml; charset=utf-8"
            },
-           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+           "request_body": "<soap:Envelope xmlns:soap=\\"http://schemas.xmlsoap.org/soap/envelope/\\"><soap:Body><GetOpenChecks xmlns=\\"http://micros-hosting.com/EGateway/\\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
        }
    }`
   },
@@ -37,9 +37,9 @@ const actions = [
        "data": {
            "request_headers": {
                "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
-               "Content-Type": "text\/xml; charset=utf-8"
+               "Content-Type": "text/xml; charset=utf-8"
            },
-           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+           "request_body": "<soap:Envelope xmlns:soap=\\"http://schemas.xmlsoap.org/soap/envelope/\\"><soap:Body><GetOpenChecks xmlns=\\"http://micros-hosting.com/EGateway/\\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
        }
    }`
   },
@@ -53,9 +53,9 @@ const actions = [
        "data": {
            "request_headers": {
                "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
-               "Content-Type": "text\/xml; charset=utf-8"
+               "Content-Type": "text/xml; charset=utf-8"
            },
-           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+           "request_body": "<soap:Envelope xmlns:soap=\\"http://schemas.xmlsoap.org/soap/envelope/\\"><soap:Body><GetOpenChecks xmlns=\\"http://micros-hosting.com/EGateway/\\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
        }
    }`
   },
@@ -69,9 +69,9 @@ const actions = [
        "data": {
            "request_headers": {
                "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
-               "Content-Type": "text\/xml; charset=utf-8"
+               "Content-Type": "text/xml; charset=utf-8"
            },
-           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+           "request_body": "<soap:Envelope xmlns:soap=\\"http://schemas.xmlsoap.org/soap/envelope/\\"><soap:Body><GetOpenChecks xmlns=\\"http://micros-hosting.com/EGateway/\\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
        }
    }`
   },
@@ -85,9 +85,9 @@ const actions = [
        "data": {
            "request_headers": {
                "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
-               "Content-Type": "text\/xml; charset=utf-8"
+               "Content-Type": "text/xml; charset=utf-8"
            },
-           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+           "request_body": "<soap:Envelope xmlns:soap=\\"http://schemas.xmlsoap.org/soap/envelope/\\"><soap:Body><GetOpenChecks xmlns=\\"http://micros-hosting.com/EGateway/\\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
        }
    }`
   },
@@ -101,9 +101,9 @@ const actions = [
        "data": {
            "request_headers": {
                "SOAPAction": "http://micros-hosting.com/EGateway/GetOpenChecks",
-               "Content-Type": "text\/xml; charset=utf-8"
+               "Content-Type": "text/xml; charset=utf-8"
            },
-           "request_body": "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><GetOpenChecks xmlns=\"http://micros-hosting.com/EGateway/\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
+           "request_body": "<soap:Envelope xmlns:soap=\\"http://schemas.xmlsoap.org/soap/envelope/\\"><soap:Body><GetOpenChecks xmlns=\\"http://micros-hosting.com/EGateway/\\"><vendorCode/><employeeObjectNum>90001</employeeObjectNum></GetOpenChecks></soap:Body></soap:Envelope>"
        }
    }`
   }
@@ -200,7 +200,7 @@ class DashboardPaction extends React.Component {
         <div>
           {actions.map(action => (
             <Button
-              variant="raised"
+              variant="contained"
               style={{ marginRight: 12, marginTop: 10 }}
               onClick={this.updatePayload(action.id)}
             >
