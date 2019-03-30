@@ -75,7 +75,6 @@ class DashboardPage extends React.Component {
     return (
       <div className={classes.root}>
         <form className={classes.root} autoComplete="off">
-          <Typography variant="title">Order Manager Command Tester</Typography>
           <FormControl variant="outlined" className={classes.formControl}>
             <TextField
               id="location_key_field"
