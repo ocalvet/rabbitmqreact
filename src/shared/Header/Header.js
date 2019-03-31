@@ -38,7 +38,7 @@ const Header = ({ classes, open, onOpenDrawer }) => {
           RabbitMQ Connection Tester
         </Typography>
         <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
+          <Badge badgeContent={null} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
