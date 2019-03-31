@@ -9,40 +9,23 @@ import Header from './shared/Header/Header';
 import SideMenu from './shared/SideMenu/SideMenu';
 import { styles } from './AppStyles';
 
-class App extends React.Component {
-  state = {
-    open: false
-  };
-
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
-
-  render() {
-    const { classes } = this.props;
-    return (
-      <Router>
-        <div className={classes.root}>
-          <CssBaseline />
-          <Header open={this.state.open} onOpenDrawer={this.handleDrawerOpen} />
-          <SideMenu
-            open={this.state.open}
-            onCloseDrawer={this.handleDrawerClose}
-          />
-          <main className={classes.content}>
-            <div className={classes.appBarSpacer} />
-            <Route path="/" exact component={DashboardPage} />
-            <Route path="/configuration" component={ConfigurationPage} />
-          </main>
-        </div>
-      </Router>
-    );
-  }
-}
+const App = ({ classes }) => {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <Router>
+      <div className={classes.root}>
+        <CssBaseline />
+        <Header open={open} onOpenDrawer={() => setOpen(true)} />
+        <SideMenu open={open} onCloseDrawer={() => setOpen(false)} />
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Route path="/" exact component={DashboardPage} />
+          <Route path="/configuration" component={ConfigurationPage} />
+        </main>
+      </div>
+    </Router>
+  );
+};
 
 App.propTypes = {
   classes: PropTypes.object.isRequired
