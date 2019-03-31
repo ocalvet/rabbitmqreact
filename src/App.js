@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,7 +11,7 @@ import { styles } from './AppStyles';
 
 class App extends React.Component {
   state = {
-    open: true,
+    open: false
   };
 
   handleDrawerOpen = () => {
@@ -29,7 +29,10 @@ class App extends React.Component {
         <div className={classes.root}>
           <CssBaseline />
           <Header open={this.state.open} onOpenDrawer={this.handleDrawerOpen} />
-          <SideMenu open={this.state.open} onCloseDrawer={this.handleDrawerClose} />
+          <SideMenu
+            open={this.state.open}
+            onCloseDrawer={this.handleDrawerClose}
+          />
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
             <Route path="/" exact component={DashboardPage} />
@@ -42,7 +45,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(App);
