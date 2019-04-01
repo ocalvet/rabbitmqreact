@@ -15,7 +15,7 @@ import {
 } from '../shared/constants';
 import styles from './DashboardPageStyles';
 import { uuid } from '../shared/utils';
-
+import LocationEntry from './LocationEntry';
 
 class DashboardPage extends React.Component {
   state = {
@@ -56,7 +56,10 @@ class DashboardPage extends React.Component {
   };
 
   handleRabbitServerSwitch = event => {
-    const connectionInfo = event.target.value === 'AZ' ? azureConnectionInfo : appsuiteConnectionInfo;
+    const connectionInfo =
+      event.target.value === 'AZ'
+        ? azureConnectionInfo
+        : appsuiteConnectionInfo;
     this.client = queue.initialize(connectionInfo);
     this.setState({
       connectionInfo: event.target.value
@@ -65,8 +68,8 @@ class DashboardPage extends React.Component {
 
   onSendCommand = () => {
     const id = uuid();
-    queue.consume(id,this.client, this.state, this.handleMessageReceived);
-    queue.sendCommand(id,this.client, this.state);
+    queue.consume(id, this.client, this.state, this.handleMessageReceived);
+    queue.sendCommand(id, this.client, this.state);
   };
 
   render() {
@@ -74,20 +77,11 @@ class DashboardPage extends React.Component {
     return (
       <div className={classes.root}>
         <form className={classes.root} autoComplete="off">
-          <FormControl variant="outlined" className={classes.formControl}>
-            <TextField
-              id="location_key_field"
-              label="Enter Location Key"
-              value={this.state.locationKey}
-              InputLabelProps={{
-                shrink: true
-              }}
-              onChange={this.handleChange('locationKey')}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-          </FormControl>
+          <LocationEntry
+            value={this.state.locationKey}
+            handleChange={this.handleChange('locationKey')}
+            classes={classes}
+          />
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="tmc-simple">Select Rabbit Instance</InputLabel>
             <Select
