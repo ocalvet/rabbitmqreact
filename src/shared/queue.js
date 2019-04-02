@@ -2,10 +2,10 @@ import Stomp from 'stompjs';
 import xmlFormatter from 'xml-formatter';
 import { uuid } from './utils';
 
-const initialize = (connectionInfo) => {
+const initialize = connectionInfo => {
   const socket = new WebSocket(connectionInfo.connectString);
   const client = Stomp.over(socket);
-  client.debug = null; // comment out this line to see more logging
+  // client.debug = null; // comment out this line to see more logging
   client.connect(
     connectionInfo.user,
     connectionInfo.password,
