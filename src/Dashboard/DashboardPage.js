@@ -2,9 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import queue from '../shared/queue';
 import { withStyles } from '@material-ui/core/styles';
 import { getCommandString } from '../shared/utils';
@@ -17,6 +14,7 @@ import styles from './DashboardPageStyles';
 import { uuid } from '../shared/utils';
 import LocationEntry from './LocationEntry';
 import RabbitSelector from './RabbitSelector';
+import CommandSelector from './CommandSelector';
 
 class DashboardPage extends React.Component {
   state = {
@@ -89,54 +87,22 @@ class DashboardPage extends React.Component {
             classes={classes}
           />
           <div>
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="tmc-simple">
-                Transaction Manager Commands
-              </InputLabel>
-              <Select
-                value={this.state.transactionManager}
-                onChange={this.handleCommandChange('transactionManager')}
-                inputProps={{
-                  name: 'transactionManager',
-                  id: 'tmc-simple'
-                }}
-              >
-                <MenuItem value="">
-                  <em>Select a command</em>
-                </MenuItem>
-                {actions.transactionManager.map(command => {
-                  return (
-                    <MenuItem key={command.id} value={command.id}>
-                      {command.label}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="config-simple">
-                Config Changes Commands
-              </InputLabel>
-              <Select
-                value={this.state.config}
-                onChange={this.handleCommandChange('config')}
-                inputProps={{
-                  name: 'config',
-                  id: 'config-simple'
-                }}
-              >
-                <MenuItem value="">
-                  <em>Select a command</em>
-                </MenuItem>
-                {actions.config.map(command => {
-                  return (
-                    <MenuItem key={command.id} value={command.id}>
-                      {command.label}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
+            <CommandSelector
+              label="Transaction Manager Commands"
+              value={this.state.transactionManager}
+              handleChange={this.handleCommandChange('transactionManager')}
+              classes={classes}
+              name={'transactionManager'}
+              commands={actions.transactionManager}
+            />
+            <CommandSelector
+              label="Config Changes Commands"
+              value={this.state.config}
+              handleChange={this.handleCommandChange('config')}
+              classes={classes}
+              name={'config'}
+              commands={actions.config}
+            />
           </div>
           <div>
             <FormControl
