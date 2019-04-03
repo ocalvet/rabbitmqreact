@@ -16,6 +16,7 @@ import {
 import styles from './DashboardPageStyles';
 import { uuid } from '../shared/utils';
 import LocationEntry from './LocationEntry';
+import RabbitSelector from './RabbitSelector';
 
 class DashboardPage extends React.Component {
   state = {
@@ -82,20 +83,11 @@ class DashboardPage extends React.Component {
             handleChange={this.handleChange('locationKey')}
             classes={classes}
           />
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="tmc-simple">Select Rabbit Instance</InputLabel>
-            <Select
-              value={this.state.connectionInfo}
-              onChange={this.handleRabbitServerSwitch}
-              inputProps={{
-                name: 'connectionInfo',
-                id: 'connectionInfo'
-              }}
-            >
-              <MenuItem value={'AS'}>Appsuite (10.10.0.8)</MenuItem>
-              <MenuItem value={'AZ'}>Azure (137.117.65.53)</MenuItem>
-            </Select>
-          </FormControl>
+          <RabbitSelector
+            value={this.state.connectionInfo}
+            handleChange={this.handleRabbitServerSwitch}
+            classes={classes}
+          />
           <div>
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="tmc-simple">
