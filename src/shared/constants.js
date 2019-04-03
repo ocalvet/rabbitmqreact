@@ -14,8 +14,7 @@ export const appsuiteConnectionInfo = {
   password: process.env.REACT_APP_RABBITMQ_PASSWORD_AS
 };
 
-const postTransactionXML = `
-<?xml version="1.0" encoding="utf-8"?>
+const postTransactionXML = `<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <soap:Body>
         <PostTransactionEx xmlns="http://micros-hosting.com/EGateway/">
@@ -78,22 +77,19 @@ const postTransactionXML = `
             <ppCheckPrintLines />
         </PostTransactionEx>
     </soap:Body>
-</soap:Envelope>
-`;
+</soap:Envelope>`;
 
-const getMenuItemsXML = `
-<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <soap:Body>
-        <GetConfigurationInfo xmlns="http://micros-hosting.com/EGateway/">
-            <vendorCode />
-            <employeeObjectNum>90001</employeeObjectNum>
-            <configurationInfoType><int>1</int></configurationInfoType>
-            <revenueCenter>1</revenueCenter>
-            <configInfoResponse />
-        </GetConfigurationInfo>
-    </soap:Body>
-</soap:Envelope>
-`;
+const getMenuItemsXML = `<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<soap:Body>
+    <GetConfigurationInfo xmlns="http://micros-hosting.com/EGateway/">
+        <vendorCode />
+        <employeeObjectNum>90001</employeeObjectNum>
+        <configurationInfoType><int>1</int></configurationInfoType>
+        <revenueCenter>1</revenueCenter>
+        <configInfoResponse />
+    </GetConfigurationInfo>
+</soap:Body>
+</soap:Envelope>`;
 
 /* eslint-disable no-useless-escape */
 export const actions = {
@@ -136,8 +132,8 @@ export const actions = {
       id: 3,
       label: 'Update URL - Appsuite',
       payload: {
-        request_type: 'config',
-        command: '',
+        request_type: 'command',
+        command: 'config',
         command_id: '3242iuouou-b9d0-45f3-bbbe-6e2b8aae4c5a',
         data: {
           host: '10.10.0.8',
@@ -149,8 +145,8 @@ export const actions = {
       id: 4,
       label: 'Update URL - Azure',
       payload: {
-        request_type: 'config',
-        command: '',
+        request_type: 'command',
+        command: 'config',
         command_id: '3242iuouou-b9d0-45f3-bbbe-6e2b8aae4c5a',
         data: {
           host: '137.117.65.53',
@@ -162,8 +158,8 @@ export const actions = {
       id: 5,
       label: 'Update Log Level - Debug',
       payload: {
-        request_type: 'config',
-        command: '',
+        request_type: 'command',
+        command: 'config',
         command_id: 'dsafsd2-b9d0-45f3-bbbe-6e2b8aae4c5a',
         data: {
           logLevel: 'debug'
@@ -172,25 +168,25 @@ export const actions = {
     },
     {
       id: 6,
-      label: 'Update Log Level - Verbose',
+      label: 'Update Log Level - All',
       payload: {
-        request_type: 'config',
-        command: '',
+        request_type: 'command',
+        command: 'config',
         command_id: 'dsafsd2-b9d0-45f3-bbbe-6e2b8aae4c5a',
         data: {
-          logLevel: 'verbose'
+          logLevel: 'all'
         }
       }
     },
     {
       id: 7,
-      label: 'Update Log Level - Quiet',
+      label: 'Update Log Level - Off',
       payload: {
-        request_type: 'config',
-        command: '',
+        request_type: 'command',
+        command: 'config',
         command_id: '231dfds-b9d0-45f3-bbbe-6e2b8aae4c5a',
         data: {
-          logLevel: 'quiet'
+          logLevel: 'off'
         }
       }
     }

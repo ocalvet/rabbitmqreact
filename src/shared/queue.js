@@ -1,6 +1,5 @@
 import Stomp from 'stompjs';
 import xmlFormatter from 'xml-formatter';
-import { uuid } from './utils';
 
 const initialize = connectionInfo => {
   const socket = new WebSocket(connectionInfo.connectString);
@@ -21,7 +20,14 @@ const initialize = connectionInfo => {
 };
 
 const getXMLResponse = (sub, message) => {
+  console.log('Got message', message);
+  if (!message || message.lenght <= 1) {
+    return `Empty message from server`;
+  }
   const jsonBody = JSON.parse(message);
+  if (jsonBody.command === 'config') {
+    return jsonBody.response;
+  }
   const parser = new DOMParser();
   const xmlDoc = parser.parseFromString(jsonBody.response, 'text/xml');
   console.log(xmlDoc);
@@ -37,8 +43,18 @@ const getXMLResponse = (sub, message) => {
   return formattedXml;
 };
 
-const sendCommand = (client, state, handleMessageReceived) => {
-  const id = uuid();
+const consume = (id, client, state, handleMessageReceived) => {
+  const responseQueue = `plugin_${state.locationKey}_response`;
+  const sub = client.subscribe(`/amq/queue/${responseQueue}`, message => {
+    console.log('received message', sub, message);
+    if (message.headers['correlation-id'] === id) {
+      handleMessageReceived(sub, message);
+      sub.unsubscribe();
+    }
+  });
+}
+
+const sendCommand = (id, client, state) => {
   const commandQueue = `plugin_${state.locationKey}_command`;
   const responseQueue = `plugin_${state.locationKey}_response`;
   console.log(`Sending`);
@@ -46,13 +62,6 @@ const sendCommand = (client, state, handleMessageReceived) => {
   console.log(`command queue: ${commandQueue}`);
   console.log(`response queue: ${responseQueue}`);
   console.log(state.payload);
-  const sub = client.subscribe(`/amq/queue/${responseQueue}`, message => {
-    console.log('received message', sub, message);
-    if (message.headers['correlation-id'] === id) {
-      handleMessageReceived(sub, message.body);
-      sub.unsubscribe();
-    }
-  });
   client.send(
     `/amq/queue/${commandQueue}`,
     {
@@ -66,5 +75,6 @@ const sendCommand = (client, state, handleMessageReceived) => {
 export default {
   initialize,
   getXMLResponse,
-  sendCommand
+  sendCommand, 
+  consume,
 };

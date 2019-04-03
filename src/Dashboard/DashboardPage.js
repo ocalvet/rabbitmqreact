@@ -15,6 +15,8 @@ import {
   azureConnectionInfo
 } from '../shared/constants';
 import styles from './DashboardPageStyles';
+import { uuid } from '../shared/utils';
+
 
 class DashboardPage extends React.Component {
   state = {
@@ -32,8 +34,8 @@ class DashboardPage extends React.Component {
   }
 
   handleMessageReceived = (sub, message) => {
-    const formattedXml = queue.getXMLResponse(sub, message);
-    this.setState({ response: formattedXml });
+    const formattedText = queue.getXMLResponse(sub, message.body);
+    this.setState({ response: formattedText });
   };
 
   handleCommandChange = command => event => {
@@ -63,7 +65,9 @@ class DashboardPage extends React.Component {
   };
 
   onSendCommand = () => {
-    queue.sendCommand(this.client, this.state, this.handleMessageReceived);
+    const id = uuid();
+    queue.consume(id,this.client, this.state, this.handleMessageReceived);
+    queue.sendCommand(id,this.client, this.state);
   };
 
   render() {

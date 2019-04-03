@@ -10,4 +10,4 @@ export const uuid = () => {
   return uuid;
 };
 
-export const getCommandString = action => action ? JSON.stringify(action.payload, null, 2) : '';
+export const getCommandString = action => action ? JSON.stringify(action.payload) : '';
