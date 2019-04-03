@@ -1,7 +1,5 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
 import queue from '../shared/queue';
 import { withStyles } from '@material-ui/core/styles';
 import { getCommandString } from '../shared/utils';
@@ -15,6 +13,8 @@ import { uuid } from '../shared/utils';
 import LocationEntry from './LocationEntry';
 import RabbitSelector from './RabbitSelector';
 import CommandSelector from './CommandSelector';
+import Payload from './Payload';
+import Response from './Response';
 
 class DashboardPage extends React.Component {
   state = {
@@ -105,27 +105,11 @@ class DashboardPage extends React.Component {
             />
           </div>
           <div>
-            <FormControl
-              variant="outlined"
-              className={classes.formControl}
-              fullWidth
-            >
-              <TextField
-                id="outlined-multiline-flexible"
-                label="Soap Payload"
-                multiline
-                rows="10"
-                fullWidth
-                value={this.state.payload}
-                InputLabelProps={{
-                  shrink: true
-                }}
-                onChange={this.handleChange('payload')}
-                className={classes.textField}
-                margin="normal"
-                variant="outlined"
-              />
-            </FormControl>
+            <Payload
+              payload={this.state.payload}
+              handleChange={this.handleChange('payload')}
+              classes={classes}
+            />
           </div>
           <Button
             variant="contained"
@@ -135,10 +119,7 @@ class DashboardPage extends React.Component {
             Send
           </Button>
         </form>
-        <div>
-          Response:
-          <pre>{this.state.response || <div>No Response available</div>}</pre>
-        </div>
+        <Response response={this.state.response} />
       </div>
     );
   }
