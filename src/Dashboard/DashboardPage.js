@@ -9,7 +9,7 @@ import {
   azureConnectionInfo
 } from '../shared/constants';
 import styles from './DashboardPageStyles';
-import { uuid } from '../shared/utils';
+import uuid from 'uuid';
 import LocationEntry from './LocationEntry';
 import RabbitSelector from './RabbitSelector';
 import CommandSelector from './CommandSelector';
@@ -66,7 +66,7 @@ class DashboardPage extends React.Component {
   };
 
   onSendCommand = () => {
-    const id = uuid();
+    const id = uuid.v4();
     queue.consume(id, this.client, this.state, this.handleMessageReceived);
     queue.sendCommand(id, this.client, this.state);
   };
