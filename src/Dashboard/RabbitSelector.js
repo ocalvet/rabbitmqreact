@@ -15,7 +15,7 @@ const LocationEntry = ({ classes, value, handleChange }) => (
         id: 'connectionInfo'
       }}
     >
-      <MenuItem value={'AS'}>Appsuite (10.10.0.8)</MenuItem>
+      <MenuItem value={'AS'}>Other (10.10.0.8)</MenuItem>
       <MenuItem value={'AZ'}>Azure (137.117.65.53)</MenuItem>
     </Select>
   </FormControl>

@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { getCommandString } from '../shared/utils';
 import {
   actions,
-  appsuiteConnectionInfo,
+  otherConnectionInfo,
   azureConnectionInfo
 } from '../shared/constants';
 import styles from './DashboardPageStyles';
@@ -56,9 +56,7 @@ class DashboardPage extends React.Component {
 
   handleRabbitServerSwitch = event => {
     const connectionInfo =
-      event.target.value === 'AZ'
-        ? azureConnectionInfo
-        : appsuiteConnectionInfo;
+      event.target.value === 'AZ' ? azureConnectionInfo : otherConnectionInfo;
     this.client = queue.initialize(connectionInfo);
     this.setState({
       connectionInfo: event.target.value

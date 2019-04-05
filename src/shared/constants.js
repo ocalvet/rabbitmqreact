@@ -7,7 +7,7 @@ export const azureConnectionInfo = {
   password: process.env.REACT_APP_RABBITMQ_PASSWORD_AZ
 };
 
-export const appsuiteConnectionInfo = {
+export const otherConnectionInfo = {
   connectString: process.env.REACT_APP_RABBITMQ_CONNECT_STRING_AS,
   virtualHost: process.env.REACT_APP_RABBITMQ_VH_AS,
   user: process.env.REACT_APP_RABBITMQ_USER_AS,
@@ -130,7 +130,7 @@ export const actions = {
   config: [
     {
       id: 3,
-      label: 'Update URL - Appsuite',
+      label: 'Update URL - Other',
       payload: {
         request_type: 'command',
         command: 'config',
