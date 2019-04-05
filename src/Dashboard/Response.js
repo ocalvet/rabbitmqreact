@@ -1,12 +1,17 @@
 import React from 'react';
+import { Typography, withStyles } from '@material-ui/core';
 
-const Response = ({ response }) => {
+const styles = theme => ({
+
+});
+
+const Response = ({ response, classes }) => {
   return (
     <div>
-      Response:
+      <Typography variant="h5">Response:</Typography>
       <pre>{response || <div>No Response available</div>}</pre>
     </div>
   );
 };
 
-export default Response;
+export default withStyles(styles)(Response);
